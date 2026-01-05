@@ -82,3 +82,38 @@ def most_successful_athelets(df, country):
   x =  temp_df['Name'].value_counts().reset_index().merge(df,left_on='Name',right_on='Name',how='left')[['Name','count','Sport']].drop_duplicates('Name')
   x.rename(columns={'count':'Medals'},inplace=True)
   return x.head(10)
+
+
+def weight_v_height(df, sport):
+  athelet_df = df.drop_duplicates(subset=['Name', 'region'])
+  athelet_df['Medal'] = athelet_df['Medal'].fillna('No Medal')
+  athelet_df = athelet_df.dropna(subset=['Weight', 'Height'])
+
+  # If sport is empty/None or the special 'Overall' option, return full dataframe
+  if not sport:
+    return athelet_df
+
+  # If user selected the 'Overall' option (string), return full dataframe
+  if isinstance(sport, str) and sport == 'Overall':
+    return athelet_df
+
+  # Ensure we pass a list-like to Series.isin
+  if isinstance(sport, (list, tuple, set, np.ndarray)):
+    sport_values = list(sport)
+  else:
+    sport_values = [sport]
+
+  return athelet_df[athelet_df['Sport'].isin(sport_values)]
+
+def men_vs_women(df):
+  athelet_df = df.drop_duplicates(subset=['Name','region'])
+
+  men = athelet_df[athelet_df['Sex'] == 'M'].groupby('Year').count()['Name'].reset_index()
+  women = athelet_df[athelet_df['Sex'] == 'F'].groupby('Year').count()['Name'].reset_index()
+
+  final = men.merge(women, on='Year', how='left')
+  final.rename(columns={'Name_x':'Male','Name_y':'Female'},inplace=True)
+
+  final.fillna(0,inplace=True)
+
+  return final 
