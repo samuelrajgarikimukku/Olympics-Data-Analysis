@@ -119,3 +119,14 @@ if user_menu == 'Country-wise Analysis':
     fig = px.line(country_df, x='Year', y='Medal')
     st.title(selected_country + " Medal Tally over the years")
     st.plotly_chart(fig)
+
+
+
+    st.title(selected_country + " Excel in the following sports ")
+    pt = helpper.country_event_heatmap(df, selected_country)
+    if pt.empty:
+        st.warning("No data available for the selected filters")
+    else:
+        fig, ax = plt.subplots(figsize=(20,20))
+        ax = sns.heatmap(pt,annot=True)
+        st.pyplot(fig)
