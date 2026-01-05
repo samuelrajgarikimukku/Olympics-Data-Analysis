@@ -10,7 +10,7 @@ df = preprocessor.preprocess(df,region_df)
 st.sidebar.title("Olympic")
 user_menu = st.sidebar.radio(
     'Select an option',
-    ('Medal Tally', 'Overal Analysis', 'Country-wise Analysis', 'Athlete wise Analysi')
+    ('Medal Tally', 'Overall Analysis', 'Country-wise Analysis', 'Athlete wise Analysi')
 )
 
 
@@ -31,4 +31,42 @@ if user_menu == 'Medal Tally':
     if selected_country != "Overall" and  selected_year != "Overall":
         st.title(selected_country + "performance in" + str(selected_year) + "Olympics")
 
-    st.dataframe(medal_tally)
+    st.table(medal_tally)
+
+if user_menu == "Overall Analysis":
+    editions = df['Year'].unique().shape[0]-1
+    cities = df['City'].unique().shape[0]
+    sports = df['Sport'].unique().shape[0]
+    events = df['Event'].unique().shape[0]
+    athletes = df['Name'].unique().shape[0]
+    nations = df['region'].unique().shape[0]
+
+
+
+    st.title("Top Statistics")
+    col1,col2,col3 = st.columns(3)
+    with col1:
+        st.header("Editions")
+        st.title(editions)
+    
+    with col2:
+        st.header("Hosts")
+        st.title(cities)
+
+    with col3:
+        st.header("Sports")
+        st.title(sports)
+
+
+    col1,col2,col3 = st.columns(3)
+    with col1:
+        st.header("Editions")
+        st.title(events)
+    
+    with col2:
+        st.header("Hosts")
+        st.title(nations)
+
+    with col3:
+        st.header("Sports")
+        st.title(athletes)
