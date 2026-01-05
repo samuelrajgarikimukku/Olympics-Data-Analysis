@@ -121,6 +121,13 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
+## Deployment
+
+The application is deployed on Render and is accessible as a hosted web application.
+The deployed version allows users to explore the full analytical functionality without running the project locally.
+
+Live Application: <[Olympic Data Analysis](https://olympics-data-analysis-2-21z9.onrender.com/)>
+
 ## Technical Scope and Outcomes
 
 This project demonstrates:
