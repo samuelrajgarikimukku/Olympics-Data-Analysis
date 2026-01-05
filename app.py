@@ -13,7 +13,7 @@ df = preprocessor.preprocess(df,region_df)
 
 
 st.sidebar.title("Olympic Analysis")
-st.sidebar.image("C:\\Users\\samue\\Desktop\\olympic project\\data\\image.jfif",width=200)
+st.sidebar.image("data/image.jfif",width=200)
 
 
 user_menu = st.sidebar.radio(
