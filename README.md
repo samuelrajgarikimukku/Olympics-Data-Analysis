@@ -85,7 +85,7 @@ The project uses multiple visualization libraries based on the type of insight r
 Add screenshots of the running application here.
 
 -  Application Home / Sidebar Navigation
-  -  (Insert screenshot here)
+![alt text](<Screenshot (627).png>)
 - Medal Tally View
   - (Insert screenshot here)
 - Overall Analysis – Trends and Heatmaps
