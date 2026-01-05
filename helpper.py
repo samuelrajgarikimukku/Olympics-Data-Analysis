@@ -54,4 +54,13 @@ def most_successful(df,sport):
 
   x =  temp_df['Name'].value_counts().reset_index().merge(df,left_on='Name',right_on='Name',how='left')[['Name','count','Sport','region']].drop_duplicates('Name')
   x.rename(columns={'count':'Medals'},inplace=True)
-  return x.head(15)
+  return x
+
+def yearwise_medal_tally(df,country):
+  temp_df = df.dropna(subset=['Medal'])
+  temp_df.drop_duplicates(subset=['Team','NOC','Games','Year','City','Sport','Event','Medal'],inplace=True)
+
+  new_df = temp_df[temp_df['region'] == country]
+  final_df = new_df.groupby('Year').count()['Medal'].reset_index()
+
+  return final_df
